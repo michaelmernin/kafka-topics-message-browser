@@ -1,0 +1,3 @@
+# Enter topic name and schema file names here (all filename should be in avro_schemas/ directory)
+# Example below
+# generic-topic-name: "generic-topic-schema.avsc"

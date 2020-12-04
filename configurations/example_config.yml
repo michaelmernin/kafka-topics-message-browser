@@ -1,0 +1,45 @@
+# The following in an example config file, which is required by the kafka-browser.
+# Steps to configure kafka-browser:
+# 1) Copy, paste, and rename this file to main_config.yml in /configurations directory
+# 2) enter required information below (all other values may remain the same)
+#    - pfx_file: "<path to pfx file>"
+#    - ssl.certificate.location: "<path to crt file>"
+#    - ssl.key.location: "<path to .key file>"
+#    - ssl.ca.location: "<path to ca root .cer>"
+#    - group.id: '<group id: arbitrary string can be used>'
+#    - client.id: '<client id: arbitrary string can be used>'
+#    - hostname: "server_hostname"
+#    - port: "listening_port"
+
+# HOST and PORT Settings
+hostname: '127.0.0.1'
+port: '5000'
+
+# Kafka-Broker Configs
+bootstrap.servers:
+    environment_1: 'example-broker.com:9000'
+    environment_2: '<BOOTSTRAP_SERVER_URI>:<PORT>'
+    environment_3: '<BOOTSTRAP_SERVER_URI>:<PORT>'
+group.id: 'enter_group_id'
+client.id: 'enter_client_id'
+enable.auto.commit: 'False'
+session.timeout.ms: '6000'
+default.topic.config:
+  auto.offset.reset: 'smallest'
+security.protocol: 'SSL'
+api.version.request: 'True'
+enable.partition.eof: 'True'
+ssl:
+  environment_1:
+    pfx_file: "<path to pfx file>"
+    ssl.certificate.location: "<path to crt file>"
+    ssl.key.location: "<path to .key file>"
+    ssl.key.password: "<key passphrase>"
+
+
+
+# Kafka-Registry Configs
+ssl.ca.location: "<path to ca root .cer>"
+schema_registry_url:
+    environment_1: "https://example-registry.com:8000"
+    environment_2: "schema_registry_url"

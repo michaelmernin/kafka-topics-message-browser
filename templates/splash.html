@@ -1,0 +1,37 @@
+<b>KAFKA-TOPIC-BROWSER</b><br><br>
+This is an example html landing page for the kafka browser.<br><br>
+You may use this restful service to browse messages from kafka topics <br><br>
+For more info, please view the README at: <br>
+<a href="https://enter_github_link_here">https://enter_github_link_here</a>
+
+<form action="/search" method="post">
+    <br><br>
+    <b>SEARCH FOR STRING IN KAFKA</b><br>
+    <input type="text" placeholder="Enter String Here" name="searchParam">
+    <button type="submit">Search</button><br>
+    <input type="checkbox" name="includeDelimiter" value="true"> if checked, delimiter provided in results <br>
+    <input type="checkbox" name="includeKafkaMetadata" value="true"> if checked, Kafka metadata provided in results
+    <br><br><br>
+
+    <b>CHOOSE ENVIRONMENT</b><br>
+    <select id = 'environment' name="environment">
+        <option value = 'example_environment_1'>example_environment_1</option>
+        <option value = 'example_environment_2'>example_environment_2</option>
+    </select><br><br>
+
+    <i>Only selected topics will be included in the search</i><br><br>
+    <b>JSON-TOPICS</b><br>
+    <input type="checkbox" name="example_json_topic" value="example_json_topic"> example_json_topic <br>
+
+
+    <br><b>AVRO TOPICS</b><br>
+    <input type="checkbox" name="example_avro_topic" value="example_avro_topic"> example_avro_topic <br>
+	
+	<br>
+    (ADVANCED)
+    SEARCH OTHER TOPICS<br>
+    Enter topic name here<br>
+    Spelling and format must be an exact match, entered topic name will be included in search<br>
+    <input type="text" name="otherTopics" value="NONE">
+
+</form>

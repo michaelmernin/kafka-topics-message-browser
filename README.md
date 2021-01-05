@@ -100,4 +100,29 @@ Windows Users:
 - stop service: ```$ sc \\<hostname> stop <service_name>```  
 - start service ```$ sc \\<hostname> start <service_name>``` 
 
-Mac Users: TBD  
+Mac Users: TBD   
+
+# Adding new topics to browser and UI   
+
+#### Adding JSON topics  
+> Adding json topics is relatively straight forward.  The only addition that needs to be made is to the UI (templates/splash.html).  
+
+Replace "new-json-topic" in the below example with the new topic's full name and place in the desired location.  
+```
+<input type="checkbox" name="json_topics[]" value="new-json-topic"> new-json-topic <br>
+```
+
+#### Adding AVRO topics
+Adding avro topics will require making (3) changes  
+1. Similar to json topics, you will need to add the new topic's full name to the UI (templates/splash.html) using the following convention.  
+```
+<input type="checkbox" name="avro_topics[]" value="new-avro-topic"> new-avro-topic <br>
+```  
+2. Add new topic's schema to directory: avro_schemas/
+> avro schema filename extension is .avsc  
+3. Add topic name and schema file name to static/avro_topic_names.yml. 
+Example:  
+```
+new-avro-topic: "newAvroTopic.avsc"
+```
+> The filename added in step 3 must match the schema file name added in Step 2

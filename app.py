@@ -11,7 +11,6 @@ from logger import RequestLogger
 configuration_directory = constants.DIRECTORY_CONFIGURATIONS
 topics_directory = constants.DIRECTORY_TOPICS
 file_main_config = constants.FILE_MAIN_CONFIG
-file_json_topics = constants.FILE_JSON_TOPICS
 file_avro_topics = constants.FILE_AVRO_TOPICS
 file_logger_config = constants.FILE_LOGGER_CONFIG
 
@@ -21,9 +20,6 @@ with open(configuration_directory + "\\" + file_main_config) as file:
 # Load avro topics
 with open(topics_directory + "\\" + file_avro_topics) as file:
     ConnectionConfig.avro_topics = yaml.load(file, Loader=yaml.FullLoader) or {}
-# Load json topics
-with open(topics_directory + "\\" + file_json_topics) as file:
-    ConnectionConfig.json_topics = yaml.load(file, Loader=yaml.FullLoader) or []
 # Load logger config file
 with open(configuration_directory + "\\" + file_logger_config) as file:
     ConnectionConfig.logger_details = yaml.load(file, Loader=yaml.FullLoader) or {}

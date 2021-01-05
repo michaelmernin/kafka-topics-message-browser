@@ -9,7 +9,6 @@ DIRECTORY_DEPLOYMENT_SCRIPTS = 'deployment_scripts'
 # CONFIG FILENAMES
 FILE_MAIN_CONFIG = 'main_config.yml'
 FILE_LOGGER_CONFIG = 'logger_config.yml'
-FILE_JSON_TOPICS = 'json_topics.yml'
 FILE_AVRO_TOPICS = 'avro_topics.yml'
 FILE_UI = 'splash.html'
 
@@ -23,6 +22,8 @@ REQUEST_JSON_TOPICS_KEY = 'json_topics'
 REQUEST_AVRO_TOPICS_KEY = 'avro_topics'
 REQUEST_NOT_BEFORE_KEY = 'notBefore'
 REQUEST_SEARCH_COUNT_KEY = 'search_count'
+REQUEST_UI_FORM_JSON_TOPICS_KEY = 'json_topics[]'
+REQUEST_UI_FORM_AVRO_TOPICS_KEY = 'avro_topics[]'
 
 # REQUEST_PARAMS
 PARAM_SEARCH_STRING_KEY = 'search_string'

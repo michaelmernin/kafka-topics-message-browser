@@ -1,8 +1,7 @@
 import datetime
 import json
-from datetime import *
-
 import pytz
+from datetime import *
 
 import constants
 import default_constants
@@ -77,6 +76,18 @@ class RequestHandler:
         # Merges form(UI calls), args(Postman form-data) params
         parsed_request = {**request.form.to_dict(), **request.args.to_dict()}
 
+        # Extract json_topics from splash.html if present
+        json_topics = request.form.getlist(constants.REQUEST_UI_FORM_JSON_TOPICS_KEY)
+        if len(json_topics) > 0:
+            parsed_request[cls.param_json_topics_key] = json_topics
+            parsed_request.pop(constants.REQUEST_UI_FORM_JSON_TOPICS_KEY)
+
+        # Extract avro_topics from splash.html if present
+        avro_topics = request.form.getlist(constants.REQUEST_UI_FORM_AVRO_TOPICS_KEY)
+        if len(avro_topics) > 0:
+            parsed_request[cls.param_avro_topics_key] = avro_topics
+            parsed_request.pop(constants.REQUEST_UI_FORM_AVRO_TOPICS_KEY)
+
         # Support for JAVA JSON body requests
         if request.json:
             parsed_request = {**parsed_request, **request.json}
@@ -133,20 +144,10 @@ class RequestHandler:
         if parsed_request.get(cls.request_json_topics_key):
             params[cls.param_json_topics_key] = set(parsed_request.get(cls.request_json_topics_key))
 
-        # Search for json topics in keys and values of request (would like to deprecate)
-        for name in set(ConnectionConfig.json_topics):
-            if name in parsed_request.values() or name in parsed_request.keys():
-                params[cls.param_json_topics_key].add(name)
-
         # Build AVRO TOPIC SEARCH LIST
         params[cls.param_avro_topics_key] = set()
         if parsed_request.get(cls.request_avro_topics_key):
             params[cls.param_avro_topics_key] = set(parsed_request.get(cls.request_avro_topics_key))
-
-        # Search for avro topics in keys and values of request (would like to deprecate)
-        for name in set(ConnectionConfig.avro_topics.keys()):
-            if name in parsed_request.values() or name in parsed_request.keys():
-                params[cls.param_avro_topics_key].add(name)
 
         # Add other_topic to proper search list (JSON or AVRO)
         if params[cls.param_other_topic_key] != "none":
@@ -187,9 +188,8 @@ class RequestHandler:
 
             for avro_topic_name in params.get(cls.param_avro_topics_key):
                 if avro_topic_name not in ConnectionConfig.avro_topics:
-                    response[cls.response_avro_topics_prefix + avro_topic_name] = \
-                        list().insert(0,
-                                      "Error. Application does not have avro schema string for requested topic: " + avro_topic_name)
+                    response[
+                        cls.response_avro_topics_prefix + avro_topic_name] = "Error. Application does not have avro schema string for requested topic: " + avro_topic_name
                     continue
                 try:
                     # Load avro deserializer for request topic

@@ -79,13 +79,13 @@ class RequestHandler:
         # Extract json_topics from splash.html if present
         json_topics = request.form.getlist(constants.REQUEST_UI_FORM_JSON_TOPICS_KEY)
         if len(json_topics) > 0:
-            parsed_request[cls.param_json_topics_key] = json_topics
+            parsed_request[cls.request_json_topics_key] = json_topics
             parsed_request.pop(constants.REQUEST_UI_FORM_JSON_TOPICS_KEY)
 
         # Extract avro_topics from splash.html if present
         avro_topics = request.form.getlist(constants.REQUEST_UI_FORM_AVRO_TOPICS_KEY)
         if len(avro_topics) > 0:
-            parsed_request[cls.param_avro_topics_key] = avro_topics
+            parsed_request[cls.request_avro_topics_key] = avro_topics
             parsed_request.pop(constants.REQUEST_UI_FORM_AVRO_TOPICS_KEY)
 
         # Support for JAVA JSON body requests
